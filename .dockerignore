@@ -1,0 +1,29 @@
+# Gitファイル
+.git
+.gitignore
+
+# Dockerファイル
+Dockerfile
+.dockerignore
+
+# Makeファイル
+Makefile
+
+# 一般的な不要ファイル
+*.pyc
+__pycache__/
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.venv/
+*.so
+.Python
+.coverage
+htmlcov/
+.pytest_cache/
+.tox/
+
+# プロジェクト固有のファイル
+README.md 
