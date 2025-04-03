@@ -16,5 +16,5 @@ COPY static static/
 # ポートの公開
 EXPOSE 8080
 
-# アプリケーションの実行
-CMD ["python", "app.py"] 
+# ホットリロード対応の開発サーバー起動コマンド
+CMD ["flask", "run", "--host=0.0.0.0", "--port=8080", "--reload", "--debug"] 

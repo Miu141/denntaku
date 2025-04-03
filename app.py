@@ -4,6 +4,8 @@
 from flask import Flask, render_template, request, jsonify
 
 app = Flask(__name__)
+app.config['ENV'] = 'development'  # 開発環境設定
+app.config['DEBUG'] = True         # デバッグモード有効化
 
 def calculate(num1, num2, operator):
     """
@@ -67,5 +69,6 @@ def calculate_route():
     except Exception as e:
         return jsonify({'success': False, 'message': f'予期せぬエラー: {str(e)}'})
 
+# Flaskアプリのエントリポイント
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080, debug=True) 
