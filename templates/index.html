@@ -3,39 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Web電卓アプリ</title>
+    <title>モダン電卓アプリ</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
     <div class="calculator-container">
-        <h1>Web電卓アプリ</h1>
-        
         <div class="calculator">
-            <div class="input-group">
-                <label for="num1">最初の数:</label>
-                <input type="text" id="num1" placeholder="数値を入力">
+            <div class="calculator-header">
+                <div class="window-controls">
+                    <div class="control red"></div>
+                    <div class="control yellow"></div>
+                    <div class="control green"></div>
+                </div>
             </div>
             
-            <div class="input-group">
-                <label for="operation">演算子:</label>
-                <select id="operation">
-                    <option value="+">足し算 (+)</option>
-                    <option value="-">引き算 (-)</option>
-                    <option value="*">掛け算 (×)</option>
-                    <option value="/">割り算 (÷)</option>
-                </select>
+            <div class="calculator-display">
+                <div class="display-history" id="history"></div>
+                <div class="display-current" id="display">0</div>
             </div>
             
-            <div class="input-group">
-                <label for="num2">2番目の数:</label>
-                <input type="text" id="num2" placeholder="数値を入力">
+            <div class="calculator-buttons">
+                <div class="button function" data-action="clear">AC</div>
+                <div class="button function" data-action="toggle">+/-</div>
+                <div class="button function" data-action="percent">%</div>
+                <div class="button operator" data-action="divide">÷</div>
+                
+                <div class="button number" data-num="7">7</div>
+                <div class="button number" data-num="8">8</div>
+                <div class="button number" data-num="9">9</div>
+                <div class="button operator" data-action="multiply">×</div>
+                
+                <div class="button number" data-num="4">4</div>
+                <div class="button number" data-num="5">5</div>
+                <div class="button number" data-num="6">6</div>
+                <div class="button operator" data-action="subtract">−</div>
+                
+                <div class="button number" data-num="1">1</div>
+                <div class="button number" data-num="2">2</div>
+                <div class="button number" data-num="3">3</div>
+                <div class="button operator" data-action="add">+</div>
+                
+                <div class="button number zero" data-num="0">0</div>
+                <div class="button number" data-num=".">.</div>
+                <div class="button equals" data-action="calculate">=</div>
             </div>
-            
-            <button id="calculate-btn">計算する</button>
-            
-            <div class="result" id="result-container">
-                <p>計算結果: <span id="result">ここに結果が表示されます</span></p>
-            </div>
+        </div>
+    </div>
+    
+    <div class="notification" id="notification">
+        <div class="notification-content">
+            <i class="fas fa-info-circle"></i>
+            <span id="notification-message"></span>
         </div>
     </div>
     

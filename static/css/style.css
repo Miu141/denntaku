@@ -1,116 +1,280 @@
 /* 全体のスタイル */
-body {
-    font-family: 'Helvetica Neue', Arial, sans-serif;
-    line-height: 1.6;
-    color: #333;
-    background-color: #f5f5f5;
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap');
+
+:root {
+    --background: #f5f5f5;
+    --calculator-bg: #2d2d2d;
+    --display-bg: #2d2d2d;
+    --button-bg: #5e5e5e;
+    --number-button-bg: #5e5e5e;
+    --operator-button-bg: #f99f36;
+    --function-button-bg: #444444;
+    --button-text: #ffffff;
+    --display-text: #ffffff;
+    --box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+    --transition-speed: 0.2s;
+}
+
+* {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', Arial, sans-serif;
+    background-color: var(--background);
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
+    overflow: hidden;
 }
 
 /* コンテナスタイル */
 .calculator-container {
+    width: 330px;
+    background-color: var(--calculator-bg);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: var(--box-shadow);
+    transform: scale(1);
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.calculator-container:hover {
+    transform: scale(1.02);
+}
+
+/* ウィンドウコントロール */
+.calculator-header {
+    display: flex;
+    padding: 10px;
+    background-color: #1c1c1c;
+}
+
+.window-controls {
+    display: flex;
+    gap: 6px;
+}
+
+.control {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+
+.red {
+    background-color: #ff5f57;
+}
+
+.yellow {
+    background-color: #ffbd2e;
+}
+
+.green {
+    background-color: #28ca42;
+}
+
+/* ディスプレイスタイル */
+.calculator-display {
+    background-color: var(--display-bg);
+    color: var(--display-text);
+    padding: 30px 20px;
+    text-align: right;
+    position: relative;
+    min-height: 120px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.display-history {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 16px;
+    height: 24px;
+    margin-bottom: 8px;
+    overflow: hidden;
+    transition: all 0.3s;
+}
+
+.display-current {
+    font-size: 48px;
+    font-weight: 300;
+    letter-spacing: 1px;
     width: 100%;
-    max-width: 500px;
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    padding: 30px;
-    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    transition: all 0.3s;
 }
 
-h1 {
-    color: #333;
-    margin-bottom: 25px;
-    font-size: 24px;
+/* ボタングリッドのスタイル */
+.calculator-buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    padding: 1px;
 }
 
-/* 電卓フォームスタイル */
-.calculator {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-.input-group {
-    display: flex;
-    flex-direction: column;
-    text-align: left;
-}
-
-label {
-    font-weight: bold;
-    margin-bottom: 5px;
-    font-size: 14px;
-    color: #555;
-}
-
-input, select {
-    padding: 12px 15px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    font-size: 16px;
-    transition: border-color 0.3s;
-}
-
-input:focus, select:focus {
-    border-color: #4a90e2;
-    outline: none;
-    box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.2);
-}
-
-button {
-    background-color: #4a90e2;
-    color: white;
+.button {
+    background-color: var(--button-bg);
+    color: var(--button-text);
     border: none;
-    padding: 14px;
-    border-radius: 5px;
-    font-size: 16px;
+    font-size: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
-    transition: background-color 0.3s;
-    font-weight: bold;
+    transition: all var(--transition-speed) ease;
+    aspect-ratio: 1 / 1;
+    user-select: none;
 }
 
-button:hover {
-    background-color: #3a7bc8;
+.button:active {
+    transform: scale(0.95);
+    filter: brightness(1.2);
 }
 
-button:active {
-    transform: translateY(1px);
+.number {
+    background-color: var(--number-button-bg);
 }
 
-/* 結果表示エリア */
-.result {
-    margin-top: 10px;
-    padding: 15px;
-    background-color: #f9f9f9;
-    border-radius: 5px;
-    border-left: 4px solid #4a90e2;
+.operator {
+    background-color: var(--operator-button-bg);
+    font-weight: 500;
 }
 
-#result {
-    font-weight: bold;
-    color: #4a90e2;
+.function {
+    background-color: var(--function-button-bg);
 }
 
-/* エラーメッセージスタイル */
-.error {
-    color: #e74c3c;
-    font-weight: bold;
+.equals {
+    background-color: var(--operator-button-bg);
+    font-weight: 500;
+}
+
+.zero {
+    grid-column: span 2;
+    aspect-ratio: auto;
+}
+
+/* アニメーション効果 */
+@keyframes buttonPop {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(0.95);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes shake {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    20%, 60% {
+        transform: translateX(-5px);
+    }
+    40%, 80% {
+        transform: translateX(5px);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(249, 159, 54, 0.7);
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(249, 159, 54, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(249, 159, 54, 0);
+    }
+}
+
+.button:hover {
+    filter: brightness(1.1);
+}
+
+.button.clicked {
+    animation: buttonPop 0.2s ease;
+}
+
+.calculator-display.error {
+    animation: shake 0.3s cubic-bezier(.36,.07,.19,.97) both;
+}
+
+.display-current.updated {
+    animation: fadeIn 0.3s ease-out;
+}
+
+.equals:hover {
+    animation: pulse 1.5s infinite;
+}
+
+/* 通知のスタイル */
+.notification {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    background-color: #333;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    display: flex;
+    align-items: center;
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.notification.show {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+}
+
+.notification-content {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.notification i {
+    color: #f99f36;
+}
+
+/* ダークモード対応（システム設定に従う） */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --background: #121212;
+    }
 }
 
 /* レスポンシブデザイン */
-@media (max-width: 600px) {
+@media (max-width: 400px) {
     .calculator-container {
-        padding: 20px;
-        margin: 15px;
+        width: 100%;
+        max-width: 330px;
+        border-radius: 16px;
     }
     
-    h1 {
-        font-size: 20px;
+    .display-current {
+        font-size: 40px;
     }
 } 
